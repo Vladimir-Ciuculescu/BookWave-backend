@@ -1,5 +1,5 @@
 import { Model, ObjectId, Schema, models } from "mongoose";
-import { Visibility, visibilites } from "types/enums/visibility.enum";
+import { Visibility, visibilites } from "../types/enums/visibility.enum";
 import { model } from "mongoose";
 
 export interface AutoPlayListDocument {

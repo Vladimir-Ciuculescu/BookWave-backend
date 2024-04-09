@@ -4,7 +4,7 @@ import { fileParserMiddleware } from "../middlewares/file-parser.middleware";
 import { isAuthenticatedMiddleware } from "../middlewares/is-authenticated.middleware";
 import { validateTokenMiddleware } from "../middlewares/validate-token.middleware";
 import { validateMiddleware } from "../middlewares/validate.middleware";
-import { changePasswordSchema, passwordResetTokenSchem, signInSchema, tokenSchema, userSchema } from "../yup/user.schemas";
+import { changePasswordSchema, passwordResetTokenSchem, signInSchema, tokenSchema, userSchema } from "../yup-schemas/user.schemas";
 
 const router: any = Router();
 

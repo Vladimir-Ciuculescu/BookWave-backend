@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import "module-alias/register";
+// import "module-alias/register";
 import "dotenv/config";
 import "./utils/schedule";
 

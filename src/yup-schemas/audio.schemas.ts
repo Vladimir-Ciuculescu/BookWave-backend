@@ -1,4 +1,4 @@
-import { categories } from "types/enums/audio-category.enum";
+import { categories } from "../types/enums/audio-category.enum";
 import * as Yup from "yup";
 
 export const audioSchema = Yup.object().shape({

@@ -1,5 +1,5 @@
 import { isValidObjectId } from "mongoose";
-import { visibilites } from "types/enums/visibility.enum";
+import { visibilites } from "../types/enums/visibility.enum";
 import * as Yup from "yup";
 
 export const addPlayListSchema = Yup.object().shape({

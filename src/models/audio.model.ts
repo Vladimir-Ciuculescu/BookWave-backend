@@ -1,5 +1,5 @@
 import mongoose, { Model, ObjectId, Schema, models } from "mongoose";
-import { Category, categories } from "types/enums/audio-category.enum";
+import { Category, categories } from "../types/enums/audio-category.enum";
 
 // ? Interfaces
 export interface AudioDocument<T = ObjectId> {

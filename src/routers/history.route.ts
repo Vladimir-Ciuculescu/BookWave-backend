@@ -3,7 +3,7 @@ import HistoryController from "../controllers/history.controller";
 import { isAuthenticatedMiddleware } from "../middlewares/is-authenticated.middleware";
 import { isVerifiedMiddleware } from "../middlewares/is-verified.middleware";
 import { validateMiddleware } from "../middlewares/validate.middleware";
-import { historySchema } from "../yup/historty.schemas";
+import { historySchema } from "../yup-schemas/historty.schemas";
 
 const router: any = Router();
 

@@ -1,5 +1,5 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
-import { convertFormData } from "utils/convertFormData";
+import { convertFormData } from "../utils/convertFormData";
 import * as Yup from "yup";
 
 export const validateMiddleware = (schema: any): RequestHandler => {

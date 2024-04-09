@@ -1,5 +1,5 @@
 import { RequestHandler, Request, Response, NextFunction } from "express";
-import PasswordResetTokenModel from "models/password-reset-token.model";
+import PasswordResetTokenModel from "../models/password-reset-token.model";
 
 export const validateTokenMiddleware = (): RequestHandler => {
   return async (req: Request, res: Response, next: NextFunction) => {

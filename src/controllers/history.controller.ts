@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import HistoryModel from "models/history.model";
+import HistoryModel from "../models/history.model";
 import { Types } from "mongoose";
-import { History } from "types/common/History";
-import { RemoveHistoryRequest, UpdateHistoryRequest } from "types/requests/history.requests";
+import { History } from "../types/common/History";
+import { RemoveHistoryRequest, UpdateHistoryRequest } from "../types/requests/history.requests";
 
 const updateHistory = async (req: UpdateHistoryRequest, res: Response) => {
   const userId = req.user.id;

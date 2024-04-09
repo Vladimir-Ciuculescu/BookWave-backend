@@ -1,6 +1,6 @@
 import { Response } from "express";
-import AudioModel from "models/audio.model";
-import PlayListModel, { PlayListDocument } from "models/playlist.model";
+import AudioModel from "../models/audio.model";
+import PlayListModel, { PlayListDocument } from "../models/playlist.model";
 import { PipelineStage, Schema, Types, isValidObjectId } from "mongoose";
 import {
   AddPlayListRequest,
@@ -12,7 +12,7 @@ import {
   RemovePlayListRequest,
   UpdatePlayListRequest,
   getIsExistentInPlaylistRequest,
-} from "types/requests/playlist.requests";
+} from "../types/requests/playlist.requests";
 
 const createPlayList = async (req: AddPlayListRequest, res: Response) => {
   const { title, audioId, visibility } = req.body;

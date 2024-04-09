@@ -1,5 +1,5 @@
 import mongoose, { Model, ObjectId, Schema, models } from "mongoose";
-import { History } from "types/common/History";
+import { History } from "../types/common/History";
 
 // ? Interface
 export interface HistoryDocument {

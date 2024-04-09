@@ -1,4 +1,4 @@
-import { Category } from "types/enums/audio-category.enum";
+import { Category } from "../../types/enums/audio-category.enum";
 import { FilesRequest } from "./files.request";
 import { Request } from "express";
 

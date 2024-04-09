@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import AudioModel from "models/audio.model";
-import FavoriteModel, { FavoriteDocument } from "models/favorite.model";
+import AudioModel from "../models/audio.model";
+import FavoriteModel, { FavoriteDocument } from "../models/favorite.model";
 import { PipelineStage, isValidObjectId } from "mongoose";
-import { ToggleFavoriteAudioRequest } from "types/requests/audio.requests";
-import { GetFavoritesRequest, GetFavoritesTotalCountRequest } from "types/requests/favorite.request";
+import { ToggleFavoriteAudioRequest } from "../types/requests/audio.requests";
+import { GetFavoritesRequest, GetFavoritesTotalCountRequest } from "../types/requests/favorite.request";
 
 const toggleFavoriteAudio = async (req: ToggleFavoriteAudioRequest, res: Response) => {
   const { audioId } = req.query;

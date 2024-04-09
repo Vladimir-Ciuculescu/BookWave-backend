@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import HistoryModel from "models/history.model";
+import HistoryModel from "../models/history.model";
 import moment from "moment";
 
 export const getUsersPreviousHistory = async (req: Request) => {

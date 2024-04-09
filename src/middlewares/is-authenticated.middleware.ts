@@ -1,6 +1,6 @@
 import { RequestHandler, Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload, verify } from "jsonwebtoken";
-import UserModel from "models/user.model";
+import UserModel from "../models/user.model";
 
 export const isAuthenticatedMiddleware: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;

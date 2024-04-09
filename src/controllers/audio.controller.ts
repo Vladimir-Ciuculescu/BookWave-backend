@@ -1,7 +1,7 @@
 import { RequestHandler, Response } from "express";
-import AudioModel, { AudioDocument } from "models/audio.model";
+import AudioModel, { AudioDocument } from "../models/audio.model";
 import { ObjectId } from "mongoose";
-import { AddAudioRequest, GetLatestUploadsRequest } from "types/requests/audio.requests";
+import { AddAudioRequest, GetLatestUploadsRequest } from "../types/requests/audio.requests";
 import cloudinary from "../cloud/cloud";
 
 const addAudioFile: RequestHandler = async (req: AddAudioRequest, res: Response) => {

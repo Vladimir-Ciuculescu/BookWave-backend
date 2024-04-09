@@ -2,9 +2,9 @@ import crypto from "crypto";
 import { Request, RequestHandler, Response } from "express";
 import fs from "fs";
 import jwt from "jsonwebtoken";
-import EmailVerificationTokenModel, { EmailVertificationTokenDocument } from "models/email-vertification.model";
-import PasswordResetTokenModel, { PasswordResetTokenDocument } from "models/password-reset-token.model";
-import UserModel, { UserDocument } from "models/user.model";
+import EmailVerificationTokenModel, { EmailVertificationTokenDocument } from "../models/email-vertification.model";
+import PasswordResetTokenModel, { PasswordResetTokenDocument } from "../models/password-reset-token.model";
+import UserModel, { UserDocument } from "../models/user.model";
 import { isValidObjectId } from "mongoose";
 import path from "path";
 import {
@@ -16,9 +16,9 @@ import {
   SignInRequest,
   VerifyEmailRequest,
   VerifyPasswordResetTokenRequest,
-} from "types/requests/user.requests";
-import { generateToken } from "utils/generateToken";
-import { sendEmail } from "utils/sendEmail";
+} from "../types/requests/user.requests";
+import { generateToken } from "../utils/generateToken";
+import { sendEmail } from "../utils/sendEmail";
 import cloudinary from "../cloud/cloud";
 import { resetPasswordTemplate } from "../mail/reset-password.template";
 import { verifyEmailTemplate } from "../mail/verify-email.template";
@@ -266,64 +266,54 @@ const resendVerificationToken = async (req: ReVerifyEmailRequest, res: Response)
 };
 
 const forgotPassword = async (req: ForgotPasswordRequest, res: Response) => {
-  const { email } = req.body;
-
-  try {
-    const user = await UserModel.findOne({ email });
-
-    if (!user) {
-      return res.status(404).json({ error: "User does not exist !" });
-    }
-
-    await PasswordResetTokenModel.findOneAndDelete({ owner: user._id });
-
-    const token = crypto.randomBytes(36).toString("hex");
-
-    const passwordResetToken = new PasswordResetTokenModel<PasswordResetTokenDocument>({
-      //@ts-ignore
-      owner: user._id,
-      token,
-    });
-
-    await PasswordResetTokenModel.create<PasswordResetTokenDocument>(passwordResetToken);
-
-    const baseLink = process.env.PASSWORD_RESET_LINK;
-
-    const passwordResetLink = `${baseLink}?token=${token}?userId=${user._id}`;
-
-    sendEmail(
-      user!.email,
-      "vladimir.ciuculescu@gmail.com",
-      "Reset password Link",
-      resetPasswordTemplate({
-        title: "Reset password",
-        message: "It looks like you forgot your password. Use the link below to create a new one",
-        logo: "cid:logo",
-        banner: "cid:password_reset",
-        link: passwordResetLink,
-        btnTitle: "Reset password",
-      }),
-      [
-        {
-          filename: "logo.png",
-          path: path.join(__dirname, "../assets/logo.png"),
-          cid: "logo",
-        },
-        {
-          filename: "password_reset.png",
-          path: path.join(__dirname, "../assets/password_reset.png"),
-          cid: "password_reset",
-        },
-      ],
-    );
-
-    return res.status(201).json({ link: passwordResetLink });
-  } catch (error) {
-    console.log(error);
-    return res.status(422).json({
-      error: error,
-    });
-  }
+  // const { email } = req.body;
+  // try {
+  //   const user = await UserModel.findOne({ email });
+  //   if (!user) {
+  //     return res.status(404).json({ error: "User does not exist !" });
+  //   }
+  //   await PasswordResetTokenModel.findOneAndDelete({ owner: user._id });
+  //   const token = crypto.randomBytes(36).toString("hex");
+  //   const passwordResetToken = new PasswordResetTokenModel<PasswordResetTokenDocument>({
+  //     //@ts-ignore
+  //     owner: user._id,
+  //     token,
+  //   });
+  //   await PasswordResetTokenModel.create<PasswordResetTokenDocument>(passwordResetToken);
+  //   const baseLink = process.env.PASSWORD_RESET_LINK;
+  //   const passwordResetLink = `${baseLink}?token=${token}?userId=${user._id}`;
+  //   sendEmail(
+  //     user!.email,
+  //     "vladimir.ciuculescu@gmail.com",
+  //     "Reset password Link",
+  //     resetPasswordTemplate({
+  //       title: "Reset password",
+  //       message: "It looks like you forgot your password. Use the link below to create a new one",
+  //       logo: "cid:logo",
+  //       banner: "cid:password_reset",
+  //       link: passwordResetLink,
+  //       btnTitle: "Reset password",
+  //     }),
+  //     [
+  //       {
+  //         filename: "logo.png",
+  //         path: path.join(__dirname, "../assets/logo.png"),
+  //         cid: "logo",
+  //       },
+  //       {
+  //         filename: "password_reset.png",
+  //         path: path.join(__dirname, "../assets/password_reset.png"),
+  //         cid: "password_reset",
+  //       },
+  //     ],
+  //   );
+  //   return res.status(201).json({ link: passwordResetLink });
+  // } catch (error) {
+  //   console.log(error);
+  //   return res.status(422).json({
+  //     error: error,
+  //   });
+  // }
 };
 
 const verifyPasswordResetToken = async (req: VerifyPasswordResetTokenRequest, res: Response) => {
