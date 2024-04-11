@@ -1,7 +1,6 @@
-import express from "express";
+import express, { Response } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-// import "module-alias/register";
 import "dotenv/config";
 import "./utils/schedule";
 
@@ -39,6 +38,9 @@ app.use("/favorites", favoriteRouter);
 app.use("/playlist", playlistRouter);
 app.use("/profile", profileRouter);
 app.use("/history", historyRouter);
+app.use("/", (_, res: Response) => {
+  res.send("Welcome to the bookwave server home page");
+});
 
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
