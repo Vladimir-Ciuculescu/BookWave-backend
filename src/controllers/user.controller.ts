@@ -189,15 +189,11 @@ const sendVerificationToken = async (req: VerifyEmailRequest, res: Response) => 
 const resendVerificationToken = async (req: ReVerifyEmailRequest, res: Response) => {
   const { userId } = req.body;
 
-  console.log(111, userId);
-
   try {
     if (!isValidObjectId(userId)) {
       return res.status(403).json({ error: "Invalid user Id" });
     }
     const user = await UserModel.findById(userId);
-
-    console.log(222, user);
 
     if (user?.verified) {
       return res.status(200).json({ message: "This user already has their email verified !" });
@@ -359,10 +355,6 @@ const changePassword = async (req: ChangePasswordRequest, res: Response) => {
   await UserModel.findOneAndUpdate({ _id: user._id }, { password: password });
 
   return res.status(200).json({ message: "Password changed succesfully !" });
-
-  try {
-    await UserModel.findByIdAndUpdate();
-  } catch (error) {}
 };
 
 const updateProfile = async (req: any, res: Response) => {
@@ -370,6 +362,7 @@ const updateProfile = async (req: any, res: Response) => {
     const { name, email } = req.body;
 
     const avatar = req.files?.avatar;
+
     const userId = req.user.id;
 
     const nameJson = JSON.stringify(name);
@@ -404,8 +397,11 @@ const updateProfile = async (req: any, res: Response) => {
       });
 
       await user.updateOne({ name: nameValue, email: emailValue, avatar: { url: secure_url, publicId: public_id } });
-      return res.status(200).json({ avatar: user.avatar });
+    } else {
+      await user.updateOne({ name: nameValue, email: emailValue });
     }
+
+    return res.status(200).json({ message: "Profile updated !" });
   } catch (error: any) {
     console.log(error);
 
